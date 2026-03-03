@@ -1,54 +1,49 @@
+const fetchBtn = document.getElementById('fetch-btn');
+const navLinks = document.querySelectorAll('.nav-link');
+const sections = document.querySelectorAll('.content-box');
 
-const latitude = 52.52;
-const longitude = 13.41;
+// Handle Navigation Tabs
+navLinks.forEach(link => {
+    link.addEventListener('click', (e) => {
+        e.preventDefault();
+        navLinks.forEach(l => l.classList.remove('active'));
+        link.classList.add('active');
 
-//data for 3 days, hourly temperature at 2m height, for the location with latitude 52.52 and longitude 13.41
-const apiUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&current_weather=true&temperature_unit=fahrenheit&windspeed_unit=mph`;
+        const target = link.getAttribute('data-target');
+        sections.forEach(section => {
+            section.id === target ? section.classList.remove('hidden') : section.classList.add('hidden');
+        });
+    });
+});
 
-// site = https://open-meteo.com- 
-// endpoint = /v1/forecast
-// ? = everything after the ? is the parameter
+// Fetch Temperature and windspeed Data from APIs
+async function getWeatherData() {
+    const cityName = document.getElementById('city-input').value;
+    if (!cityName) return;
 
-
-// Select the HTML elements
-const locationEl = document.getElementById('location');
-const temperatureEl = document.getElementById('temperature');
-const windSpeedEl = document.getElementById('wind-speed');
-
-// Function to fetch weather data
-async function fetchWeatherData() {
     try {
-        // Fetch data from the API
-        const response = await fetch(apiUrl);
+        // 1. Get Latitude/Longitude from input(City Name)
+        const locUrl = `https://geocoding-api.open-meteo.com/v1/search?name=${cityName}&count=1&language=en&format=json`;
+        const locRes = await fetch(locUrl);
+        const locData = await locRes.json();
 
-        // Check if the request was successful
-        if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        if (!locData.results) throw new Error("City not found");
 
-        // Parse the response as JSON
-        const data = await response.json();
+        const { latitude, longitude } = locData.results[0];
 
-        // Extract the required data points
-        const temperature = data.current_weather.temperature;
-        const windSpeed = data.current_weather.windspeed;
-        const tempUnit = data.current_weather_units.temperature;
-        const speedUnit = data.current_weather_units.windspeed;
+        // 2. Get Weather from Latitude/Longitude
+        const weatherUrl = `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m&current=temperature_2m,wind_speed_10m&wind_speed_unit=mph&temperature_unit=fahrenheit`;
+        const weatherRes = await fetch(weatherUrl);
+        const weatherData = await weatherRes.json();
 
-        // Display the data in the HTML
-        locationEl.textContent = `${data.latitude}, ${data.longitude}`;
-        temperatureEl.textContent = `${temperature}${tempUnit}`;
-        windSpeedEl.textContent = `${windSpeed}${speedUnit}`;
-
-    } catch (error) {
-        // Handle any errors during the fetch operation
-        console.error('Error fetching weather data:', error.message);
-        locationEl.textContent = 'Failed to load data';
-        temperatureEl.textContent = 'Error';
-        windSpeedEl.textContent = 'Error';
+        // 3. Update Display
+        document.getElementById('temp-val').textContent = weatherData.current.temperature_2m;
+        document.getElementById('wind-val').textContent = weatherData.current.wind_speed_10m;
+        
+    } catch (err) {
+        alert(err.message);
     }
 }
 
-// Call the fetch function when the script loads
-fetchWeatherData();
-
+fetchBtn.addEventListener('click', getWeatherData);
+window.onload = getWeatherData; // Load default weather data on page load

@@ -1,29 +1,36 @@
 <!DOCTYPE html>
+<html lang="en">
+
 <head>
-    <title>OpenMateo-API</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/index.css">
+    <title>Weather Dashboard</title>
+    <link rel="stylesheet" href="CSS/index.css">
 </head>
+
 <body>
-    <div class="weather">
-        <h1>Current Weather</h1>
-        <p>Location: <span id="location">Fetching...</span></p>
-        <div class="data">
-            <div class="data-points">
-                <h2>Temperature</h2>
-                <p id="temperature">--</p>
-            </div>
-            <div class="data-points">
-                <h2>Wind Speed</h2>
-                <p id="wind-speed">--</p>
-            </div>
+    <div class="container">
+        <div class="input-group">
+            <input type="text" id="city-input" placeholder="Enter city (e.g. London)" value="London">
+            <button id="fetch-btn">Get Weather</button>
+        </div>
+
+        <nav class="weather-nav">
+            <a href="#" class="nav-link active" data-target="temp-section">Temperature</a>
+            <a href="#" class="nav-link" data-target="wind-section">Wind Speed</a>
+        </nav>
+
+        <div id="temp-section" class="content-box">
+            <h2>Current Temperature</h2>
+            <p><span id="temp-val">--</span>°C</p>
+        </div>
+
+        <div id="wind-section" class="content-box hidden">
+            <h2>Current Wind Speed</h2>
+            <p><span id="wind-val">--</span> km/h</p>
         </div>
     </div>
-
-        
-
     <script src="js/index.js"></script>
-
 </body>
+
 </html>
