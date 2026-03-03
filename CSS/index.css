@@ -1,0 +1,39 @@
+body {
+    font-family: sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #cde2f2;
+    margin: 0;
+}
+
+.weather {
+    background-color: rgb(171, 207, 229);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    width: 80%;
+    max-width: 400px;
+}
+
+.data {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.data-points {
+    padding: 10px;
+    background-color: #7eb7e8;
+    border-radius: 5px;
+    flex: 1;
+    margin: 0 5px;
+}
+
+#temperature, #wind-speed {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+}
