@@ -1,18 +1,95 @@
-body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: #eef2f3; display: flex; justify-content: center; padding: 50px; }
-.container { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 25px rgba(0,0,0,0.1); width: 320px; }
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: #eef2f3;
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+}
 
-.input-group { display: flex; flex-direction: column; gap: 10px; margin-bottom: 20px; }
-input { padding: 12px; border: 1px solid #ddd; border-radius: 8px; outline: none; }
-button { padding: 12px; background: #007bff; color: white; border: none; border-radius: 8px; cursor: pointer; font-weight: bold; }
-button:hover { background: #0056b3; }
+.container {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    width: 320px;
+}
 
-.weather-nav { display: flex; border-bottom: 1px solid #eee; margin-bottom: 20px; }
-.nav-link { flex: 1; text-align: center; padding: 10px; text-decoration: none; color: #888; font-size: 0.9rem; }
-.nav-link.active { color: #007bff; border-bottom: 2px solid #007bff; font-weight: bold; }
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
 
-.content-box { text-align: center; animation: fadeIn 0.3s; }
-.content-box h2 { font-size: 0.9rem; color: #666; text-transform: uppercase; letter-spacing: 1px; }
-.content-box p { font-size: 3rem; margin: 10px 0; color: #333; }
+input {
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+}
 
-.hidden { display: none; }
-@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+button {
+    padding: 12px;
+    background: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.weather-nav {
+    display: flex;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+}
+
+.nav-link {
+    flex: 1;
+    text-align: center;
+    padding: 10px;
+    text-decoration: none;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.nav-link.active {
+    color: #007bff;
+    border-bottom: 2px solid #007bff;
+    font-weight: bold;
+}
+
+.content-box {
+    text-align: center;
+    animation: fadeIn 0.3s;
+}
+
+.content-box h2 {
+    font-size: 0.9rem;
+    color: #666;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.content-box p {
+    font-size: 3rem;
+    margin: 10px 0;
+    color: #333;
+}
+
+.hidden {
+    display: none;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
